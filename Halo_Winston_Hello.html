@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#171431">
+    <title>Misi Brankas Ulang Tahun — Winston</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root {
+            --ink: #191633;
+            --muted: #706d8b;
+            --pink: #ff6fae;
+            --gold: #ffc85b;
+            --cyan: #75e5de;
+            --paper: #fffaf1;
+            --purple: #7758ee;
+            --line: #eee8ff;
+            --green: #26ae85
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'DM Sans',sans-serif;
+            color: var(--ink);
+            background: radial-gradient(ellipse at 8% 8%,#ffc7dd 0,transparent 28%),radial-gradient(ellipse at 90% 15%,#b9f4ed 0,transparent 28%),linear-gradient(135deg,#fff6e9,#f4f0ff 58%,#fff5f8);
+            overflow-x: hidden
+        }
+
+        .sparkles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .65;
+            background-image: radial-gradient(#fff 1.5px,transparent 1.5px);
+            background-size: 57px 57px;
+            mask-image: linear-gradient(#000,transparent 75%)
+        }
+
+        .wrap {
+            position: relative;
+            width: min(760px,calc(100% - 28px));
+            margin: auto;
+            padding: 28px 0 56px
+        }
+
+        .topline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #514e70;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .14em;
+            text-transform: uppercase
+        }
+
+        .badge {
+            background: #fff9;
+            border: 1px solid #fff;
+            padding: 9px 13px;
+            border-radius: 30px;
+            box-shadow: 0 6px 20px #493d7810
+        }
+
+        .hero {
+            text-align: center;
+            padding: 32px 8px 22px
+        }
+
+        .eyebrow {
+            color: #865bdc;
+            text-transform: uppercase;
+            letter-spacing: .2em;
+            font-size: 11px;
+            font-weight: 800
+        }
+
+        .hero h1 {
+            font: 700 clamp(39px,9vw,68px)/.98 'Space Grotesk',sans-serif;
+            letter-spacing: -.065em;
+            margin: 13px 0 12px
+        }
+
+        .hero h1 span {
+            color: #f05f9e
+        }
+
+        .hero p {
+            color: var(--muted);
+            line-height: 1.65;
+            margin: 0 auto;
+            max-width: 500px
+        }
+
+        .hero-art {
+            font-size: 48px;
+            letter-spacing: 9px;
+            filter: drop-shadow(0 5px 2px #e78aa440);
+            margin: 15px 0 0
+        }
+
+        .panel {
+            background: #ffffffd9;
+            border: 1px solid #fff;
+            box-shadow: 0 20px 65px #55459720,0 3px 12px #5545970b;
+            border-radius: 28px;
+            padding: clamp(19px,5vw,34px);
+            backdrop-filter: blur(10px)
+        }
+
+        .vault-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .vault-title {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .vault-icon {
+            font-size: 30px;
+            background: #fff1ce;
+            width: 52px;
+            height: 52px;
+            border-radius: 17px;
+            display: grid;
+            place-items: center
+        }
+
+        .vault-title h2 {
+            font: 700 21px 'Space Grotesk',sans-serif;
+            margin: 0
+        }
+
+        .vault-title small {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 3px
+        }
+
+        .progress-text {
+            font-size: 12px;
+            font-weight: 800;
+            color: #7959da;
+            white-space: nowrap
+        }
+
+        .track {
+            height: 9px;
+            background: #eeeafa;
+            border-radius: 99px;
+            margin: 23px 0 27px;
+            overflow: hidden
+        }
+
+        .fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg,#9d77ff,#ff72ae,#ffc456);
+            border-radius: 99px;
+            transition: width .45s
+        }
+
+        .level-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px
+        }
+
+        .pip {
+            height: 6px;
+            flex: 1;
+            border-radius: 9px;
+            background: #eae6f5;
+            transition: .3s
+        }
+
+        .pip.done {
+            background: linear-gradient(90deg,#a986ff,#ff7db0)
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 99px;
+            background: #f4efff;
+            color: #7454dc;
+            padding: 7px 11px;
+            font-size: 11px;
+            font-weight: 800
+        }
+
+        .question {
+            font: 700 clamp(23px,5vw,32px)/1.2 'Space Grotesk',sans-serif;
+            letter-spacing: -.035em;
+            margin: 16px 0 9px
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0 0 21px
+        }
+
+        .answer-row {
+            display: flex;
+            gap: 10px
+        }
+
+        .answer-row input {
+            min-width: 0;
+            flex: 1;
+            border: 2px solid #ece7f7;
+            border-radius: 15px;
+            padding: 14px 16px;
+            background: #fff;
+            font: 700 17px 'DM Sans',sans-serif;
+            outline: none;
+            transition: .2s
+        }
+
+        .answer-row input:focus {
+            border-color: #9e81f4;
+            box-shadow: 0 0 0 4px #9e81f422
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 15px;
+            padding: 14px 20px;
+            background: linear-gradient(135deg,#8664f0,#6947db);
+            color: white;
+            font: 800 14px 'DM Sans',sans-serif;
+            cursor: pointer;
+            box-shadow: 0 8px 18px #7558df35;
+            transition: transform .18s,filter .18s
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05)
+        }
+
+        .feedback {
+            height: 26px;
+            margin-top: 9px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #e45f89
+        }
+
+        .feedback.good {
+            color: var(--green)
+        }
+
+        .helper {
+            text-align: center;
+            color: #9893ac;
+            font-size: 11px;
+            margin: 8px 0 0
+        }
+
+        .lock-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 20px auto 0
+        }
+
+        .lock-digit {
+            display: grid;
+            place-items: center;
+            width: 38px;
+            height: 42px;
+            border-radius: 12px;
+            border: 1px solid #eee8ff;
+            background: #fff;
+            font: 700 19px 'Space Grotesk';
+            color: #d2cce4;
+            transition: .3s
+        }
+
+        .lock-digit.done {
+            background: #fff0d0;
+            border-color: #ffe0a0;
+            color: #c98618;
+            transform: translateY(-2px)
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 11px;
+            color: #8a85a0;
+            margin: 17px 0 0
+        }
+
+        .footer strong {
+            color: #625d7c
+        }
+
+        .gift {
+            display: none;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 34px;
+            padding-bottom: 36px
+        }
+
+        .gift.show {
+            display: block;
+            animation: pop .7s cubic-bezier(.2,.9,.3,1.2)
+        }
+
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: scale(.9) translateY(16px)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0)
+            }}
+
+        .gift-cake {
+            font-size: 74px;
+            animation: bob 2s ease-in-out infinite
+        }
+
+        @keyframes bob {
+            50% {
+                transform: translateY(-7px) rotate(2deg)
+            }}
+
+        .gift h2 {
+            font: 700 clamp(34px,8vw,53px)/1 'Space Grotesk';
+            letter-spacing: -.05em;
+            margin: 10px 0 8px
+        }
+
+        .gift h2 span {
+            color: #ed5b99
+        }
+
+        .gift .sub {
+            color: #7359ca;
+            text-transform: uppercase;
+            letter-spacing: .18em;
+            font-size: 11px;
+            font-weight: 800
+        }
+
+        .letter {
+            max-width: 510px;
+            margin: 23px auto;
+            background: #fff8e8;
+            border: 1px dashed #efca83;
+            border-radius: 18px;
+            padding: 20px 22px;
+            text-align: left;
+            color: #51465a;
+            line-height: 1.75;
+            font-size: 15px
+        }
+
+        .letter p {
+            margin: 0 0 12px
+        }
+
+        .letter p:last-child {
+            margin-bottom: 0
+        }
+
+        .signature {
+            font-weight: 800;
+            color: #db548a
+        }
+
+        .surprise {
+            max-width: 460px;
+            margin: 18px auto 0;
+            border-radius: 18px;
+            background: linear-gradient(120deg,#f1edff,#e7fffb);
+            padding: 17px
+        }
+
+        .surprise .s-title {
+            font-size: 11px;
+            color: #7359ca;
+            font-weight: 800;
+            letter-spacing: .14em;
+            text-transform: uppercase
+        }
+
+        .surprise p {
+            margin: 8px 0 0;
+            font-weight: 700;
+            line-height: 1.55
+        }
+
+        .replay {
+            margin-top: 20px;
+            background: linear-gradient(135deg,#ff78ac,#ef5890);
+            box-shadow: 0 8px 18px #ed619535
+        }
+
+        .sound-toggle {
+            position: fixed;
+            z-index: 20;
+            right: 16px;
+            bottom: 16px;
+            border: 1px solid #fff;
+            background: #ffffffed;
+            color: #54458b;
+            border-radius: 99px;
+            padding: 11px 15px;
+            font: 800 12px 'DM Sans',sans-serif;
+            box-shadow: 0 8px 24px #493d7825;
+            cursor: pointer;
+            backdrop-filter: blur(8px)
+        }
+
+        .sound-toggle:hover {
+            transform: translateY(-2px)
+        }
+
+        .sound-toggle:focus-visible {
+            outline: 3px solid #9e81f4;
+            outline-offset: 3px
+        }
+
+        .confetti {
+            position: fixed;
+            z-index: 10;
+            top: -18px;
+            width: 9px;
+            height: 14px;
+            pointer-events: none;
+            animation: fall linear forwards
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(780deg);
+                opacity: .3
+            }}
+
+        .hidden {
+            display: none!important
+        }
+
+        .shake {
+            animation: shake .32s
+        }
+
+        @keyframes shake {
+            25% {
+                transform: translateX(-6px)
+            }
+
+            75% {
+                transform: translateX(6px)
+            }}
+
+        @media(max-width:480px) {
+            .wrap {
+                padding-top: 18px
+            }
+
+            .topline {
+                font-size: 10px
+            }
+
+            .answer-row {
+                flex-direction: column
+            }
+
+            .btn {
+                width: 100%
+            }
+
+            .vault-title h2 {
+                font-size: 18px
+            }
+
+            .lock-digit {
+                width: 34px;
+                height: 38px
+            }}
+    </style>
+</head>
+<body>
+    <div class="sparkles"></div>
+    <main class="wrap">
+        <div class="topline">
+            <span class="badge">✦ Birthday Special ✦</span><span class="badge">🎈 Level up!</span>
+        </div>
+        <button id="soundToggle" class="sound-toggle" type="button" aria-pressed="false" aria-label="Aktifkan musik dan efek suara">🔇 Musik: mati</button>
+        <header class="hero">
+            <div class="eyebrow">
+                Ada misi rahasia untukmu
+            </div>
+            <h1>Selamat Ulang Tahun,<br><span>Winston!</span></h1><p>
+                Sebuah brankas kejutan sedang menunggumu! Pecahkan semua tantangannya yaa, lalu kumpulkan kuncinya, dan buka hadiah spesialmu!
+            </p>
+            <div class="hero-art" aria-hidden="true">
+                🎉 🎂 🎁
+            </div>
+        </header>
+        <section id="game" class="panel">
+            <div class="vault-head">
+                <div class="vault-title">
+                    <div class="vault-icon">
+                        🔐
+                    </div>
+                    <div>
+                        <h2>Misi Brankas</h2><small>Empat tantangan hanya ada satu angka rahasia</small>
+                    </div>
+                </div>
+                <div class="progress-text" id="progressText">
+                    0 / 4 KUNCI
+                </div>
+            </div>
+            <div class="track">
+                <div id="progressFill" class="fill"></div>
+            </div>
+            <div class="level-row" id="levelPips"></div>
+            <div id="challenge">
+                <span class="tag" id="levelTag">⭐ LEVEL 1</span><h3 class="question" id="question"></h3><p class="hint" id="hint"></p>
+                <form id="answerForm">
+                    <div class="answer-row">
+                        <input id="answer" type="text" inputmode="numeric" autocomplete="off" placeholder="Ketik jawabanmu…" aria-label="Jawaban" /><button class="btn" type="submit">Coba buka ↗</button>
+                </div>
+            </form>
+            <div id="feedback" class="feedback" aria-live="polite"></div>
+            <p class="helper">
+                Psst… semua jawaban nya disini hanya ada satu saja yaa
+            </p>
+            <div class="lock-row" id="lockRow"></div>
+        </div>
+    </section>
+    <section id="gift" class="panel gift" aria-live="polite">
+        <div class="gift-cake">
+            🎂
+        </div>
+        <div class="sub">
+            Brankas berhasil dibuka!
+        </div>
+        <h2>Untuk <span>Winston</span> ✨</h2><div class="letter">
+            <p>
+                Selamat ulang tahun, Winston Jubilele! 🥳
+            </p>
+            <p>
+                Semoga hari istimewamu dipenuhi tawa, hal-hal kecil yang bikin bahagia, dan kejutan-kejutan menyenangkan. Semoga semua impianmu semakin dekat dan tahun barumu penuh petualangan seru.
+            </p>
+            <p>
+                Terus jadi dirimu yang luar biasa karena dunia ini lebih cerah karena ada dirimu, terimakasih sudah jadi teman yang baik yaa~
+            </p>
+            <p class="signature">
+                Dengan penuh kasih dan doa,<br>Hawila & Hantika.
+            </p>
+        </div>
+        <div class="surprise">
+            <div class="s-title">
+                🎁 Kejutan rahasia milikmu sudah terbuka!
+            </div>
+            <p>
+                🎟️ Kupon spesial: satu hari penuh untuk menikmati hari besarmu dan jangan lupa untuk tersenyum!
+            </p>
+        </div>
+        <button class="btn replay" id="replay">Main lagi ↻</button>
+    </section>
+    <div class="footer">
+        Dirancang khusus dengan <strong>4 kunci ajaib!</strong>
+    </div>
+</main>
+<script>
+    // Audio dibuat langsung di browser (tanpa berkas eksternal). Bunyi hanya aktif setelah interaksi pengguna.
+    let audioCtx = null, musicTimer = null, musicOn = false, melodyStep = 0;
+    const melody = [659.25, 783.99, 880, 783.99, 659.25, 587.33, 523.25, 587.33, 659.25, 783.99, 659.25, 523.25, 587.33, 659.25, 783.99, 1046.5];
+    function getAudio() {
+        if (!audioCtx)audioCtx = new(window.AudioContext || window.webkitAudioContext)(); if (audioCtx.state === 'suspended')audioCtx.resume(); return audioCtx
+    }
+    function tone(freq, duration = .18, type = 'sine', volume = .07, delay = 0) {
+        try {
+            const c = getAudio(),
+            o = c.createOscillator(),
+            g = c.createGain(),
+            t = c.currentTime+delay; o.type = type; o.frequency.setValueAtTime(freq, t); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(volume, t+.018); g.gain.exponentialRampToValueAtTime(.0001, t+duration); o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+duration+.025)}catch(e) {}}
+    function playCorrect() {
+        tone(659, .13, 'sine', .08); tone(880, .22, 'sine', .07, .11)}
+    function playWrong() {
+        tone(220, .19, 'triangle', .045); tone(185, .22, 'triangle', .035, .12)}
+    function playUnlock() {[523.25,
+        659.25,
+        783.99,
+        1046.5,
+        1318.5].forEach((n, i)=>tone(n, .42, 'sine', .075, i*.12)); tone(1046.5, .65, 'triangle', .045, .52)}
+    function startMusic() {
+        if (musicTimer)return; getAudio(); musicOn = true; document.body.classList.add('music-on'); $('soundToggle').textContent = '🎵 Musik: nyala'; $('soundToggle').setAttribute('aria-pressed', 'true'); $('soundToggle').setAttribute('aria-label', 'Matikan musik dan efek suara'); musicTimer = setInterval(()=> {
+            if (!musicOn)return; const n = melody[melodyStep%melody.length]; tone(n, .28, 'sine', .026); if (melodyStep%4 === 0)tone(n/2, .38, 'triangle', .012); melodyStep++
+        },
+            310)}
+    function stopMusic() {
+        musicOn = false; if (musicTimer) {
+            clearInterval(musicTimer); musicTimer = null
+        }const b = $('soundToggle'); b.textContent = '🔇 Musik: mati'; b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', 'Aktifkan musik dan efek suara')}
+    const levels = [{
+        kind: '🧮 HITUNG CEPAT',
+        q: 'Berapa hasil dari 9 + 8?',
+        hint: 'Pemanasan dulu! Jumlahkan dua angka ini.'
+    },
+        {
+            kind: '🕵️ TEKA-TEKI',
+            q: 'Aku adalah setengah dari 34. Angka berapakah aku?',
+            hint: 'Pikirkan angka yang jika dikali 2 akan menjadi 34.'
+        },
+        {
+            kind: '🌟 PILIHAN BINTANG',
+            q: 'Pilih hasil yang benar: 5 × 4 − 3 = …',
+            hint: 'Hitung perkalian terlebih dahulu, lalu kurangi 3.',
+            choices: ['13',
+                '17',
+                '23',
+                '27']},
+        {
+            kind: '🗝️ KODE TERAKHIR',
+            q: 'Ada 20 lilin di kue. Tiga sudah ditiup. Berapa yang masih menyala?',
+            hint: 'Hitung lilin yang tersisa: 20 dikurangi 3.'
+        }];
+    let current = 0, unlocked = 0; const $ = id=>document.getElementById(id); $('soundToggle').addEventListener('click', ()=>musicOn?stopMusic(): startMusic()); const pips = $('levelPips'), locks = $('lockRow');
+    levels.forEach((_, i)=> {
+        const p = document.createElement('span'); p.className = 'pip'; pips.appendChild(p); const d = document.createElement('span'); d.className = 'lock-digit'; d.textContent = '✦'; locks.appendChild(d)});
+    function render() {
+        if (current >= levels.length) {
+            openGift(); return
+        }const l = levels[current]; $('levelTag').textContent = `${l.kind}  ·  LEVEL ${current+1}`; $('question').textContent = l.q; $('hint').textContent = l.hint; $('feedback').textContent = ''; $('feedback').className = 'feedback'; $('progressText').textContent = `${unlocked} / ${levels.length} KUNCI`; $('progressFill').style.width = `${unlocked/levels.length*100}%`; $('answer').value = ''; $('answer').placeholder = l.choices?'Pilih satu jawaban…': 'Ketik jawabanmu…'; const row = document.querySelector('.answer-row'); let old = document.getElementById('choices'); if (old)old.remove(); if (l.choices) {
+            $('answer').classList.add('hidden'); $('answer').parentElement.querySelector('button').classList.add('hidden'); const c = document.createElement('div'); c.id = 'choices'; c.style.cssText = 'display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%'; l.choices.forEach(v => {
+                const b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = v; b.style.cssText = 'background:linear-gradient(135deg,#9a78ef,#7151df)'; b.onclick = ()=>check(v); c.appendChild(b)}); row.after(c)} else {
+            $('answer').classList.remove('hidden'); $('answer').parentElement.querySelector('button').classList.remove('hidden'); setTimeout(()=>$('answer').focus({
+                preventScroll: true
+            }), 80)}}
+    function check(value) {
+        if (String(value).trim() === '17') {
+            if (!musicOn)startMusic(); playCorrect(); unlocked++; $('feedback').textContent = ['Tepat sekali! Kunci pertama berhasil! 🔓',
+                'Benar! Kamu makin dekat dengan hadiah! ✨',
+                'Keren! Satu kunci lagi tersimpan! 🌟',
+                'Sempurna! Semua kunci terkumpul! 🎉'][current]; $('feedback').className = 'feedback good'; $('lockRow').children[current].classList.add('done'); $('levelPips').children[current].classList.add('done'); current++; $('progressText').textContent = `${unlocked} / ${levels.length} KUNCI`; $('progressFill').style.width = `${unlocked/levels.length*100}%`; setTimeout(render, 850)} else {
+            playWrong(); $('feedback').textContent = 'Belum tepat—coba lagi! Kamu pasti bisa 💪'; $('feedback').className = 'feedback'; $('answerForm').classList.remove('shake'); void $('answerForm').offsetWidth; $('answerForm').classList.add('shake'); if (!levels[current].choices) {
+                $('answer').select()}}}
+    $('answerForm').addEventListener('submit', e=> {
+        e.preventDefault(); check($('answer').value)});
+    function confetti() {
+        const colors = ['#ff6fae',
+            '#ffc85b',
+            '#75e5de',
+            '#9b7af5',
+            '#8cda84',
+            '#ff956b']; for (let i = 0; i < 130; i++) {
+            const c = document.createElement('i'); c.className = 'confetti'; c.style.left = Math.random()*100+'vw'; c.style.background = colors[i%colors.length]; c.style.animationDuration = (2.4+Math.random()*3)+'s'; c.style.animationDelay = (Math.random()*.9)+'s'; c.style.borderRadius = Math.random() > .5?'50%': '2px'; document.body.appendChild(c); setTimeout(()=>c.remove(), 6500)}}
+    function openGift() {
+        $('game').classList.add('hidden'); $('gift').classList.add('show'); playUnlock(); confetti(); setTimeout(confetti, 1800)}$('replay').addEventListener('click', ()=> {
+            current = 0; unlocked = 0; $('gift').classList.remove('show'); $('game').classList.remove('hidden'); document.querySelectorAll('.pip,.lock-digit').forEach(e => e.classList.remove('done')); render(); window.scrollTo({
+                top: 0, behavior: 'smooth'
+            })}); render();
+</script>
+</body>
+</html>
